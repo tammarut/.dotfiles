@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/khunpleum/PycharmProjects/tutorial/tesseract'
+let g:netrw_dirhist_2='/home/khunpleum/PycharmProjects/tutorial'
+let g:netrw_dirhist_3='/home/khunpleum/PycharmProjects/tutorial/output'
+let g:netrw_dirhist_4='/home/khunpleum/PycharmProjects/tutorial'
+let g:netrw_dirhist_5='/home/khunpleum/PycharmProjects/RunningPlates'
+let g:netrw_dirhist_6='/home/khunpleum/PycharmProjects/RunningPlates/model'
+let g:netrw_dirhist_7='/home/khunpleum'
