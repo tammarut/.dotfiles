@@ -1,3 +1,40 @@
+" vim-go
+filetype plugin indent on
+
+" Allow backspace to delete indentation and inserted text
+" i.e. how it works in most programs
+" indent  allow backspacing over autoindent
+" eol     allow backspacing over line breaks (join lines)
+" start   allow backspacing over the start of insert; CTRL-W and CTRL-U
+"        stop once at the start of insert.
+set backspace=indent,eol,start
+
+" go-vim plugin specific commands
+" Also run `goimports` on your current file on every save
+" Might be be slow on large codebases, if so, just comment it out
+let g:go_fmt_command = "goimports"
+"let g:go_auto_type_info = 1  " Automatically get signature/type info for object under cursor
+let g:go_highlight_types = 1  " beautify highlight 'type'
+let g:go_highlight_functions = 1  " highlight my function and method
+let g:go_highlight_function_calls = 1  " highlight function and method invocations
+let g:go_highlight_operators = 1  " highlight operators
+
+" Autocomplete prompt to appear automatically when press .(dot)
+"au filetype go inoremap <buffer> . .<C-x><C-o>
+
+
+" Rainbow brackets Configuration
+let g:rainbow_active = 1 " Enable
+let g:rainbow_load_separately = [
+    \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']]  ],
+    \ [ '*.tex' , [['(', ')'], ['\[', '\]']]  ],
+    \ [ '*.cpp' , [['(', ')'], ['\[', '\]'], ['{', '}']]  ],
+    \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']]  ],
+    \ ]
+let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick'] " determine the colors
+let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+
+
 " Normal setting
 set number relativenumber  " turn hybrid line number on
 set showcmd "show command in bottom bar
@@ -5,6 +42,13 @@ set cursorline  "highlight current line
 set wildmenu   "visual autocomplete for command menu
 set lazyredraw  "redraw only when we need to
 set showmatch  "highlight matching [{()}]
+set autowrite
+" Change how vim represents characters on the screen
+set encoding=utf-8
+
+" Set the encoding of files written
+set fileencoding=utf-8
+
 
 "New movement keymap
 inoremap hh <ESC>
@@ -13,22 +57,34 @@ noremap l k
 noremap k j
 noremap j h
 
-" Theme
+
+" Skin
 syntax enable
 set background=dark
 colorscheme gruvbox
 
+
 set tabstop=4   " number of visual spaces per TAB
-set softtabstop=4  "number of spaces in tab when editing
+"set softtabstop=4  "number of spaces in tab when editing
 set expandtab   "tabs are spaces
 set incsearch  "search as characters are enterd
 set hlsearch  "highlight matches
+
 
 " Search down into subdirectories
 " Provides tab-completion for all file-related tasks
 set path+=**
 
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system('cat |' . s:clip, @0) | endif
+    augroup END
+endif
 set clipboard=unnamedplus  " Copy to clipboard "+y
+
 
 " netrw magic
 let g:netrw_banner = 0 "hide netrw top banner
@@ -37,32 +93,13 @@ let g:netrw_liststyle = 3  " Change the directory view in netrw
 let g:netrw_browse_split = 4 " Open on previous vim
 let g:netrw_altv = 1
 let g:netrw_winsize = 25 " size of left window
+
 " Open Vexplor automatically
 augroup ProjectDrawer
   autocmd!
   autocmd VimEnter * :Vexplore
 augroup END
 
-" Toggle Vexplore with Ctrl-E
-"function! ToggleVExplorer()
-"  if exists("t:expl_buf_num")
-"      let expl_win_num = bufwinnr(t:expl_buf_num)
-"      if expl_win_num != -1
-"          let cur_win_nr = winnr()
-"          exec expl_win_num . 'wincmd w'
-"          close
-"          exec cur_win_nr . 'wincmd w'
-"          unlet t:expl_buf_num
-"      else
-"          unlet t:expl_buf_num
-"      endif
-"  else
-"      exec '1wincmd w'
-"      Vexplore
-"      let t:expl_buf_num = bufnr("%")
-"  endif
-"endfunction
-"map <silent> <C-E> :call ToggleVExplorer()<CR>
 
 " Per default, netrw leaves unmodified buffers open. This autocommand
 " deletes netrw's buffer once it's hidden (using ':q', for example)
