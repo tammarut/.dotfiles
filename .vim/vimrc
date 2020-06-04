@@ -13,14 +13,14 @@ set backspace=indent,eol,start
 " Also run `goimports` on your current file on every save
 " Might be be slow on large codebases, if so, just comment it out
 let g:go_fmt_command = "goimports"
-"let g:go_auto_type_info = 1  " Automatically get signature/type info for object under cursor
+let g:go_auto_type_info = 1  " Automatically get signature/type info for object under cursor
 let g:go_highlight_types = 1  " beautify highlight 'type'
 let g:go_highlight_functions = 1  " highlight my function and method
 let g:go_highlight_function_calls = 1  " highlight function and method invocations
 let g:go_highlight_operators = 1  " highlight operators
 
 " Autocomplete prompt to appear automatically when press .(dot)
-au filetype go inoremap <buffer> . .<C-x><C-o>
+"au filetype go inoremap <buffer> . .<C-x><C-o>
 
 
 " ============== Rainbow brackets Configuration ============== "
@@ -44,7 +44,7 @@ let g:gitgutter_enabled = 1
 " ============== Normal setting ============== "
 set number relativenumber  " turn hybrid line number on
 set showcmd "show command in bottom bar
-set tabstop=2   " number of visual spaces per TAB
+set tabstop=4   " number of visual spaces per TAB
 set expandtab   "tabs are spaces
 set cursorline  "highlight current line
 set wildmenu   "visual autocomplete for command menu
@@ -65,6 +65,8 @@ noremap l k
 noremap k j
 noremap j h
 
+" ============== Terminal ============== "
+set splitbelow
 
 " ============== Skin ============== "
 syntax enable
@@ -100,13 +102,18 @@ let g:netrw_browse_split = 4 " Open on previous vim
 let g:netrw_altv = 1
 let g:netrw_winsize = 25 " size of left window
 
-" ================ Open Vexplor automatically  ================= "
+" ========== Open Vexplor automatically  ========== "
 augroup ProjectDrawer
   autocmd!
   autocmd VimEnter * :Vexplore
 augroup END
 
 
+
+" ==================== Buffers  ===================== "
 " Per default, netrw leaves unmodified buffers open. This autocommand
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
+" --------- Remapping key ------- "
+ map <F8> :bprevious<CR>
+ map <F9> :bnext<CR>
