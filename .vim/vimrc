@@ -41,6 +41,12 @@ highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
 highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
 let g:gitgutter_enabled = 1
 
+" ============== Vim airline ============== "
+let g:airline_powerline_fonts = 1
+let g:airline_theme='badwolf'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
 " ============== Normal setting ============== "
 set number relativenumber  " turn hybrid line number on
 set showcmd "show command in bottom bar
@@ -67,6 +73,7 @@ noremap j h
 
 " ============== Terminal ============== "
 set splitbelow
+noremap <Leader>t :ter ++rows=13<CR>
 
 " ============== Skin ============== "
 syntax enable
@@ -98,15 +105,15 @@ set clipboard=unnamedplus  " Copy to clipboard "+y
 let g:netrw_banner = 0 "hide netrw top banner
 let g:netrw_list_hide = '.*\.swap$'  " Hide vim.swp files
 let g:netrw_liststyle = 3  " Change the directory view in netrw
-let g:netrw_browse_split = 4 " Open on previous vim
-let g:netrw_altv = 1
-let g:netrw_winsize = 25 " size of left window
+let g:netrw_browse_split = 0 " Open file on same windows vim
+let g:netrw_altv = 1   " Open files in vertical
+let g:netrw_winsize = 20 " size of left window
 
 " ========== Open Vexplor automatically  ========== "
-augroup ProjectDrawer
-  autocmd!
-  autocmd VimEnter * :Vexplore
-augroup END
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
 
 
 
@@ -115,5 +122,5 @@ augroup END
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
 " --------- Remapping key ------- "
- map <F8> :bprevious<CR>
- map <F9> :bnext<CR>
+nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>  
+nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
