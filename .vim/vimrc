@@ -105,15 +105,68 @@ set clipboard=unnamedplus  " Copy to clipboard "+y
 let g:netrw_banner = 0 "hide netrw top banner
 let g:netrw_list_hide = '.*\.swap$'  " Hide vim.swp files
 let g:netrw_liststyle = 3  " Change the directory view in netrw
-let g:netrw_browse_split = 0 " Open file on same windows vim
-let g:netrw_altv = 1   " Open files in vertical
+let g:netrw_browse_split = 4 " Open file on same windows vim
+"let g:netrw_altv = 1   " Open files in vertical
 let g:netrw_winsize = 20 " size of left window
 
-" ========== Open Vexplor automatically  ========== "
-"augroup ProjectDrawer
-"  autocmd!
-"  autocmd VimEnter * :Vexplore
-"augroup END
+
+" ========== Open to Right========== "
+function! OpenToRight()
+        :normal v
+        let g:path=expand('%:p')
+        :q!
+        execute 'belowright vnew' g:path
+        :normal <C-l>
+endfunction
+
+" ========== Open to Below ========== "
+function! OpenToBelow()
+        :normal v
+        let g:path=expand('%:p')
+        :q!
+        execute 'belowright new' g:path
+        :normal <C-l>
+endfunction
+
+function! NetrwMappings()
+        " Hack fix to make ctrl-l work properly
+        noremap <buffer> <C-l> <C-w>l
+        noremap <silent> <C-b> :call ToggleNetrw()<CR>
+        noremap <buffer> V :call OpenToRight()<cr>
+        noremap <buffer> H :call OpenToBelow()<cr>
+endfunction
+
+augroup netrw_mappings
+        autocmd!
+        autocmd filetype netrw call NetrwMappings()
+augroup END
+
+" Allow for netrw to be toggled explorer
+let g:NetrwIsOpen=0  " Make sure that netrw is open variable
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i 
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+    endif
+endfunction
+
+" Close Netrw if it's the only buffer open
+"autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+
+" ========== Open netrw automatically like a project Draw ========== "
+augroup ProjectDrawer
+  autocmd!
+  autocmd VimEnter * :call ToggleNetrw()
+augroup END
 
 
 
@@ -122,5 +175,7 @@ let g:netrw_winsize = 20 " size of left window
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
 " --------- Remapping key ------- "
-nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>  
-nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
+nnoremap  <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>  
+nnoremap  <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
+nnoremap  <Leader>d :bd<CR>
+
