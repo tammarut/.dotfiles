@@ -1,4 +1,206 @@
-# Keep my .vimrc configuration
+# Keep configuration
+> vimrc
+```
+" ============== vim-go ============== "
+filetype plugin indent on
+
+" Allow backspace to delete indentation and inserted text
+" i.e. how it works in most programs
+" indent  allow backspacing over autoindent
+" eol     allow backspacing over line breaks (join lines)
+" start   allow backspacing over the start of insert; CTRL-W and CTRL-U
+"        stop once at the start of insert.
+set backspace=indent,eol,start
+
+" go-vim plugin specific commands
+" Also run `goimports` on your current file on every save
+" Might be be slow on large codebases, if so, just comment it out
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1  " Automatically get signature/type info for object under cursor
+let g:go_highlight_types = 1  " beautify highlight 'type'
+let g:go_highlight_extra_types = 1
+let g:go_highlight_functions = 1  " highlight my function and method
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1  " highlight function and method invocations
+let g:go_highlight_operators = 1  " highlight operators
+let g:go_auto_sameids = 1
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_fields = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_string_spellcheck = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+let g:go_fmt_experimental = 1
+let g:go_metalinter_autosave=1
+let g:go_metalinter_autosave_enabled=['golint', 'govet']
+
+" Autocomplete prompt to appear automatically when press .(dot)
+"au filetype go inoremap <buffer> . .<C-x><C-o>
+
+" ============== Rainbow brackets Configuration ============== "
+let g:rainbow_active = 1 " Enable
+let g:rainbow_load_separately = [
+    \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']]  ],
+    \ [ '*.tex' , [['(', ')'], ['\[', '\]']]  ],
+    \ [ '*.cpp' , [['(', ')'], ['\[', '\]'], ['{', '}']]  ],
+    \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']]  ],
+    \ ]
+let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick'] " determine the colors
+let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+
+
+" ============== Git Gutter ============== "
+highlight GitGutterAdd guifg=#009900 ctermfg=Green
+highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
+highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
+let g:gitgutter_enabled = 1
+
+" ============== Vim airline ============== "
+let g:airline_powerline_fonts = 1
+let g:airline_theme='badwolf'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" ============== Normal setting ============== "
+set number relativenumber  " turn hybrid line number on
+set showcmd "show command in bottom bar
+set tabstop=4   " number of visual spaces per TAB
+set expandtab   "tabs are spaces
+set cursorline  "highlight current line
+set wildmenu   "visual autocomplete for command menu
+set lazyredraw  "redraw only when we need to
+set showmatch  "highlight matching [{()}]
+set autowrite
+" Change how vim represents characters on the screen
+set encoding=utf-8
+
+" Set the encoding of files written
+set fileencoding=utf-8
+
+
+" ============== New movement keymap ============== "
+inoremap hh <ESC>
+noremap ; l
+noremap l k
+noremap k j
+noremap j h
+
+" ============== Terminal ============== "
+set splitbelow
+noremap <Leader>t :ter ++rows=13<CR>
+
+" ============== Skin ============== "
+syntax enable
+set background=dark
+colorscheme gruvbox
+
+" ================ Search ================= "
+set incsearch  " Highlight as you search
+set hlsearch   " Highlight the current search
+set ignorecase " Make search case insensitive...
+set smartcase  " ... except when we use uppercase letters
+
+" Search down into subdirectories
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+" ================ WSL yank support  ================= "
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system('cat |' . s:clip, @0) | endif
+    augroup END
+endif
+set clipboard=unnamedplus  " Copy to clipboard "+y
+
+
+" ================ Netrw magic  ================= "
+let g:netrw_banner = 0 "hide netrw top banner
+let g:netrw_list_hide = '.*\.swap$'  " Hide vim.swp files
+let g:netrw_liststyle = 3  " Change the directory view in netrw
+let g:netrw_browse_split = 4 " Open file on same windows vim
+"let g:netrw_altv = 1   " Open files in vertical
+let g:netrw_winsize = 20 " size of left window
+
+
+" ========== Open to Right========== "
+function! OpenToRight()
+        :normal v
+        let g:path=expand('%:p')
+        :q!
+        execute 'belowright vnew' g:path
+        :normal <C-l>
+endfunction
+
+" ========== Open to Below ========== "
+function! OpenToBelow()
+        :normal v
+        let g:path=expand('%:p')
+        :q!
+        execute 'belowright new' g:path
+        :normal <C-l>
+endfunction
+
+" =========== Mapping key OpenRight/OpenBelow ========== "
+function! NetrwMappings()
+        " Hack fix to make ctrl-l work properly
+        "noremap <buffer> <C-l> <C-w>l
+        noremap <silent> <C-b> :call ToggleNetrw()<CR>
+        noremap <buffer> V :call OpenToRight()<cr>
+        noremap <buffer> H :call OpenToBelow()<cr>
+endfunction
+
+" =========== Run Mapping function automatically ========== "
+augroup netrw_mappings
+        autocmd!
+        autocmd filetype netrw call NetrwMappings()
+augroup END
+
+" ======== Allow for netrw to be toggled explorer ========
+let g:NetrwIsOpen=0  " Make sure that netrw is open variable
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i 
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+    endif
+endfunction
+
+" Close Netrw if it's the only buffer open
+"autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+
+" ========== Open netrw automatically like a project Draw ========== "
+augroup ProjectDrawer
+  autocmd!
+  autocmd VimEnter * :call ToggleNetrw()
+augroup END
+
+
+
+" ==================== Buffers  ===================== "
+" Per default, netrw leaves unmodified buffers open. This autocommand
+" deletes netrw's buffer once it's hidden (using ':q', for example)
+autocmd FileType netrw setl bufhidden=delete
+" ———————— Remapping key ————————— "
+nnoremap  <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>  
+nnoremap  <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
+nnoremap  <Leader>d :bd<CR>
+
+```
 > .vimrc
 ```
 " Vundle Plugins configure
