@@ -15,13 +15,29 @@ set backspace=indent,eol,start
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1  " Automatically get signature/type info for object under cursor
 let g:go_highlight_types = 1  " beautify highlight 'type'
+let g:go_highlight_extra_types = 1
 let g:go_highlight_functions = 1  " highlight my function and method
+let g:go_highlight_function_parameters = 1
 let g:go_highlight_function_calls = 1  " highlight function and method invocations
 let g:go_highlight_operators = 1  " highlight operators
+let g:go_auto_sameids = 1
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_fields = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_string_spellcheck = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+let g:go_fmt_experimental = 1
+let g:go_metalinter_autosave=1
+let g:go_metalinter_autosave_enabled=['golint', 'govet']
 
 " Autocomplete prompt to appear automatically when press .(dot)
 "au filetype go inoremap <buffer> . .<C-x><C-o>
-
 
 " ============== Rainbow brackets Configuration ============== "
 let g:rainbow_active = 1 " Enable
@@ -128,20 +144,22 @@ function! OpenToBelow()
         :normal <C-l>
 endfunction
 
+" =========== Mapping key OpenRight/OpenBelow ========== "
 function! NetrwMappings()
         " Hack fix to make ctrl-l work properly
-        noremap <buffer> <C-l> <C-w>l
+        "noremap <buffer> <C-l> <C-w>l
         noremap <silent> <C-b> :call ToggleNetrw()<CR>
         noremap <buffer> V :call OpenToRight()<cr>
         noremap <buffer> H :call OpenToBelow()<cr>
 endfunction
 
+" =========== Run Mapping function automatically ========== "
 augroup netrw_mappings
         autocmd!
         autocmd filetype netrw call NetrwMappings()
 augroup END
 
-" Allow for netrw to be toggled explorer
+" ======== Allow for netrw to be toggled explorer ========
 let g:NetrwIsOpen=0  " Make sure that netrw is open variable
 function! ToggleNetrw()
     if g:NetrwIsOpen
@@ -174,7 +192,7 @@ augroup END
 " Per default, netrw leaves unmodified buffers open. This autocommand
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
-" --------- Remapping key ------- "
+" ———————— Remapping key ————————— "
 nnoremap  <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>  
 nnoremap  <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 nnoremap  <Leader>d :bd<CR>
