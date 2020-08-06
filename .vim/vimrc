@@ -1,3 +1,26 @@
+" ————————— ale ————————— 
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\}
+
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
+" Enable completion where available.
+" This setting must be set before ALE is loaded.
+"
+" You should not turn this setting on if you wish to use ALE as a completion
+" source for other completion plugins, like Deoplete.
+let g:ale_completion_enabled = 1
+
+" ————————— vim-javascript  ———————————
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1  " enables syntax highlighting
+
+" ————————— vim-prettier  ———————————
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
 " ============== vim-go ============== "
 filetype plugin indent on
 
@@ -86,6 +109,9 @@ noremap ; l
 noremap l k
 noremap k j
 noremap j h
+
+" ————————— Mouse enabled —————————
+set mouse=a
 
 " ============== Terminal ============== "
 set splitbelow
