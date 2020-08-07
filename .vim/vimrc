@@ -1,4 +1,16 @@
-" ————————— ale ————————— 
+" ——————————— YML ———————————
+" Skip re-indenting lines after a comment #, after a colon : or at the
+" beginning of a line.
+" ts (tabstop) a <Tab> key will count as two spaces
+" sw (shiftwidth) identation and auto-identation will use two spaces (eg. when
+" using >> or gg=G)
+" sts (softtabstop) a <Tab> will count for two spaces when expanding tabs
+" (inserting a tab, or using the Backspace key)
+" expandttab use spaces instead of tabs
+" foldmethod folding will be based on indentation levels
+" nofoldenable the file will be opened without any folds
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:> foldmethod=indent nofoldenable
+" ————————— ale —————————
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
@@ -6,12 +18,6 @@ let g:ale_fixers = {
 
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 1
-" Enable completion where available.
-" This setting must be set before ALE is loaded.
-"
-" You should not turn this setting on if you wish to use ALE as a completion
-" source for other completion plugins, like Deoplete.
-let g:ale_completion_enabled = 1
 
 " ————————— vim-javascript  ———————————
 let g:javascript_plugin_jsdoc = 1
@@ -19,6 +25,8 @@ let g:javascript_plugin_flow = 1  " enables syntax highlighting
 
 " ————————— vim-prettier  ———————————
 let g:prettier#autoformat = 0
+let g:prettier#quickfix_enabled = 0
+let g:prettier#exec_cmd_async = 1
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 " ============== vim-go ============== "
@@ -81,6 +89,7 @@ highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
 let g:gitgutter_enabled = 1
 
 " ============== Vim airline ============== "
+set t_Co=256
 let g:airline_powerline_fonts = 1
 let g:airline_theme='badwolf'
 let g:airline#extensions#tabline#enabled = 1
@@ -102,6 +111,13 @@ set encoding=utf-8
 " Set the encoding of files written
 set fileencoding=utf-8
 
+" —————————— Vim's Built-in for Autocompleting words ——————————
+set complete+=kspell
+set completeopt=menuone,longest
+set shortmess+=c
+" ⇨ Select the complete menu item like CTRL+y world.
+inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
+inoremap <expr> <CR> pumvisible() ? "<C-y>" : "<CR>"
 
 " ============== New movement keymap ============== "
 inoremap hh <ESC>
@@ -113,7 +129,16 @@ noremap j h
 " ————————— Mouse enabled —————————
 set mouse=a
 
-" ============== Terminal ============== "
+" ⇨Navigate around splits with a single key combo.
+nnoremap <C-l> <C-w><C-l>
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-j> <C-w><C-j>
+
+" Update a buffer's contents on focus if it changed outside of Vim.
+au FocusGained,BufEnter * :checktime
+
+"============== Terminal ============== "
 set splitbelow
 noremap <Leader>t :ter ++rows=13<CR>
 
@@ -192,7 +217,7 @@ function! ToggleNetrw()
         let i = bufnr("$")
         while (i >= 1)
             if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i 
+                silent exe "bwipeout " . i
             endif
             let i-=1
         endwhile
@@ -219,7 +244,6 @@ augroup END
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
 " ———————— Remapping key ————————— "
-nnoremap  <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>  
+nnoremap  <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 nnoremap  <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 nnoremap  <Leader>d :bd<CR>
-
