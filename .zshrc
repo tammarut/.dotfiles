@@ -114,8 +114,8 @@ alias ohmyzsh="vi ~/.oh-my-zsh"
 # vim ⇨ neovim
 alias {vi,vim}=nvim
 
-# Source fzf bash
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Source fzf zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias ll='exa -l'
 alias la='ls -A'
@@ -127,6 +127,7 @@ alias vimrc='nvim ~/.config/nvim/vimrc'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # Set 3 PATH golang
 export GOROOT=/usr/local/go
