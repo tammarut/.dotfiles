@@ -1,4 +1,4 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+ s# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -80,6 +80,7 @@ plugins=(
   node
   npm
   docker
+  vscode
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -94,11 +95,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='lvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -112,22 +113,14 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="vi ~/.zshrc"
 alias ohmyzsh="vi ~/.oh-my-zsh"
 # vim ⇨ neovim
-alias {vi,vim}=nvim
+# alias {vi,vim}=nvim
+# vim ⇨ LunarVim
+alias {vi,vim}=lvim
+# Shortcut to edit vimrc
+alias vimrc="vi ~/.config/nvim/vimrc"
 
 # Source fzf zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-alias ll='exa -l'
-alias la='ls -A'
-alias l='exa -hFGxTL 1 -s type --icons'
-alias winhome='cd /mnt/c/Users/perm_/'
-
-# Shortcut to edit vimrc
-alias vimrc='nvim ~/.config/nvim/vimrc'
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # Set 3 PATH golang
 export GOROOT=/usr/local/go
@@ -136,3 +129,23 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 #Activate .dir_colors
 test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
+
+# Concat $PATH (Pip)
+export PATH=$PATH:~/Library/Python/3.8/bin
+
+# Exa
+if [ -x "$(command -v exa)" ]; then
+  alias ll='exa -l'
+  alias la='exa -aTL 1'
+  alias l='exa -hFGxTL 1 -s type --icons'
+  alias winhome='cd /mnt/c/Users/perm_/'
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
