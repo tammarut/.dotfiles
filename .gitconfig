@@ -59,4 +59,3 @@
   conflictstyle = diff3
 [fetch]
 	prune = true
-
