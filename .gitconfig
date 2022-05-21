@@ -10,7 +10,7 @@
   diff-words = diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
 
 [credential]
-  helper = cache
+  helper = cache --timeout=72000
 
 [core]
   editor = lvim
