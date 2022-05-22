@@ -46,7 +46,7 @@
   template = /Users/pleum/.stCommitMsg
 
 [help]
-  autocorrect = 15
+  autocorrect = 10
 
 [merge]
   conflictstyle = diff3
