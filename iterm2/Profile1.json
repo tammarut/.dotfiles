@@ -1,6 +1,4 @@
 {
-"Profiles": [
-{
   "Right Option Key Sends" : 2,
   "Tags" : [
 
@@ -12,12 +10,12 @@
     "Alpha Component" : 1,
     "Green Component" : 0.67044717073440552
   },
-  "Ansi 0 Color" : {
-    "Red Component" : 0.078431375324726105,
+  "Ansi 1 Color" : {
+    "Red Component" : 0.7074432373046875,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.11764705926179886,
+    "Blue Component" : 0.16300037503242493,
     "Alpha Component" : 1,
-    "Green Component" : 0.098039217293262482
+    "Green Component" : 0.23660069704055786
   },
   "Ansi 7 Color" : {
     "Red Component" : 0.7810397744178772,
@@ -47,7 +45,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.47524076700210571
   },
-  "Custom Directory" : "Recycle",
+  "Horizontal Spacing" : 1,
   "Rows" : 30,
   "Default Bookmark" : "No",
   "Ansi 4 Color" : {
@@ -363,14 +361,14 @@
     "Green Component" : 0.99749755859375
   },
   "Transparency" : 0,
-  "Guid" : "818932DA-E7AE-4B50-B8CE-423FE57E24E0",
-  "Ansi 1 Color" : {
-    "Red Component" : 0.7074432373046875,
+  "Ansi 0 Color" : {
+    "Red Component" : 0.078431375324726105,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.16300037503242493,
+    "Blue Component" : 0.11764705926179886,
     "Alpha Component" : 1,
-    "Green Component" : 0.23660069704055786
+    "Green Component" : 0.098039217293262482
   },
+  "Guid" : "818932DA-E7AE-4B50-B8CE-423FE57E24E0",
   "Link Color" : {
     "Red Component" : 0.19802422821521759,
     "Color Space" : "sRGB",
@@ -378,7 +376,13 @@
     "Alpha Component" : 1,
     "Green Component" : 0.55789834260940552
   },
-  "Horizontal Spacing" : 1,
+  "Ansi 2 Color" : {
+    "Red Component" : 0,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0,
+    "Alpha Component" : 1,
+    "Green Component" : 0.7607843279838562
+  },
   "Ansi 5 Color" : {
     "Red Component" : 0.752197265625,
     "Color Space" : "sRGB",
@@ -403,13 +407,5 @@
     "Alpha Component" : 1,
     "Green Component" : 0.76959484815597534
   },
-  "Ansi 2 Color" : {
-    "Red Component" : 0,
-    "Color Space" : "sRGB",
-    "Blue Component" : 0,
-    "Alpha Component" : 1,
-    "Green Component" : 0.7607843279838562
-  }
-}
-]
+  "Custom Directory" : "Recycle"
 }
