@@ -1,54 +1,38 @@
-[user]
-  email = tammarut_nua@true-e-logistics.com
-  name = tammarut
-
-[github]
-  user = tammarut
-
-[alias]
-  logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  diff-words = diff --color-words='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
+[credential "helperselector"]
+	selected = cache
 
 [credential]
-  helper = cache --timeout=72000
+	helper = cache --timeout=72000
+
+[user]
+	email = chaiyo@protonmail.com
+	name = Pleum Tammarut
 
 [core]
-  editor = lvim
-  pager = diff-so-fancy | less --tabs=4 -RFX
-  excludesfile = /Users/pleum/.gitignore_global
+	excludesfile = ~/.gitignore_global
+	editor = lvim
+
+[alias]
+    st = status
+    logla = log --graph --decorate --pretty=oneline --abbrev-commit --all --date=local
+    logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
 [color]
-  status = auto
-  diff = auto
-  branch = auto
-  interactive = auto
-  grep = auto
-  ui = auto
+	ui = true
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+	grep = auto
 
-[diff]
-  tool = nvimdiff
+[init]
+	defaultBranch = main
 
-[color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 52
+[push]
+	default = current
 
-[color "diff"]
-  meta = 11
-  frag = magenta bold
-  commit = yellow bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
-
-[commit]
-  template = /Users/pleum/.stCommitMsg
-
-[help]
-  autocorrect = 10
-
-[merge]
-  conflictstyle = diff3
 [fetch]
 	prune = true
+
+[help]
+	autocorrect = 10
