@@ -57,6 +57,11 @@ export PATH=~/Library/Android/sdk/tools:$PATH
 export PATH=~/Library/Android/sdk/platform-tools:$PATH
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Z.lua
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+. /opt/homebrew/etc/profile.d/z.sh
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Enable starship shell
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 eval "$(starship init zsh)"
