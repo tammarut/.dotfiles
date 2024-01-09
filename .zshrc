@@ -40,8 +40,8 @@ export PATH=$VOLTA_HOME/bin:$PATH
 # Golang Path
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # export GOROOT=/opt/homebrew/bin/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+export GOPATH=$HOME/go:$HOME/Workspaces/Ascend-Wealth
+export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$GOROOT/bin
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
