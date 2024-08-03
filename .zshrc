@@ -51,11 +51,6 @@ export PATH=$PATH:$GOROOT/bin
 export PNPM_HOME="/Users/arima/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# Android SDK
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-export PATH=~/Library/Android/sdk/tools:$PATH
-export PATH=~/Library/Android/sdk/platform-tools:$PATH
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # FZF command-line fuzzy finder
@@ -74,4 +69,3 @@ eval "$(zoxide init zsh)"
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
-
