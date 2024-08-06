@@ -36,5 +36,6 @@
 
 [help]
 	autocorrect = 10
+
 [url "ssh://git@bitbucket.org/ascendcorp/"]
 	insteadOf = https://bitbucket.org/ascendcorp/
