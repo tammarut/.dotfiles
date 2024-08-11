@@ -6,11 +6,11 @@
 
 [user]
 	email = chaiyo@protonmail.com
-	name = Pleum Tammarut
+	name = Arima sovereignty
 
 [core]
 	excludesfile = ~/.gitignore_global
-	editor = lvim
+	editor = nvim
 
 [alias]
     st = status
@@ -36,6 +36,3 @@
 
 [help]
 	autocorrect = 10
-
-[url "ssh://git@bitbucket.org/ascendcorp/"]
-	insteadOf = https://bitbucket.org/ascendcorp/
