@@ -3,9 +3,9 @@
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR="vim"
+	export EDITOR="vim"
 else
-  export EDITOR="nvim"
+	export EDITOR="nvim"
 fi
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -15,19 +15,19 @@ fi
 alias {vi,vim}=nvim
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# Exa
+# Eza
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-if [ -x "$(command -v exa)" ]; then
-    alias ls='exa'
-    alias l='exa -hFGxTL 1 -s type --icons'
-    alias ll='exa -alhbFTL 1 --long --git'
-    alias la='exa -lbhHigUmuSa --time-style=long-iso --git --color-scale'
-    alias llm='exa -lbGd --git --sort=modified'                            # long list, modified date sort
-    alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
+if [ -x "$(command -v eza)" ]; then
+	alias ls='eza'
+	alias l='eza -ahGxTL 1 -s type --icons'
+	alias ll='eza -alhbTL 1 --long --git --icons'
+	alias la='eza -lbhHigUmuSa --time-style=long-iso --git --color-scale'
+	alias llm='eza -lbGd --git --sort=modified'                            # long list, modified date sort
+	alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
 
-    # specialty views
-    alias lS='exa -1'                                                              # one column, just names
-    alias lt='exa --tree --level=2'                                         # tree
+	# specialty views
+	alias lS='eza -1'                                                              # one column, just names
+	alias lt='eza --tree --level=2'                                         # tree
 fi
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
