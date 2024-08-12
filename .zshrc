@@ -1,6 +1,5 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
-
+# Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
 	export EDITOR="vim"
@@ -55,7 +54,7 @@ export PATH="$PNPM_HOME:$PATH"
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # FZF command-line fuzzy finder
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Enable starship shell
@@ -67,5 +66,5 @@ eval "$(starship init zsh)"
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 eval "$(zoxide init zsh)"
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+# Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
