@@ -26,7 +26,6 @@ if [ -x "$(command -v eza)" ]; then
 
 	# specialty views
 	alias lS='eza -1'                                                              # one column, just names
-	alias lt='eza --tree --level=2'                                         # tree
 fi
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
