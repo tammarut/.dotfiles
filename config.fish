@@ -37,9 +37,10 @@ set PATH $VOLTA_HOME/bin $PATH
 # Golang Path
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # No need to set GOROOT in fish (use `go env GOROOT`)
+# set -gx GOROOT $HOME/.programs/go
 set -gx GOPATH $HOME/go
-set PATH $PATH $GOPATH/bin
-set PATH $PATH $GOROOT/bin
+set -x PATH $PATH $GOPATH/bin
+set -x PATH $PATH $GOROOT/bin
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # pnpm
